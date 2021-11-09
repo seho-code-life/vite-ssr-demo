@@ -1,9 +1,15 @@
 <template>
   <div class="index-box">
     <hello-world></hello-world>
+    <div @click="handleClickMe">click me</div>
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const router = useRouter()
+const handleClickMe = () => {
+  router.push('/me')
+}
+</script>
 
 <style lang="scss" scoped>
 .index-box {

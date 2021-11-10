@@ -2,7 +2,7 @@
   <div class="index-box">
     <hello-world></hello-world>
     <div @click="handleClickMe">click me</div>
-    {{ age }}
+    {{ hello }}
   </div>
 </template>
 <script lang="ts">
@@ -17,14 +17,8 @@ export default {
     }
   },
   asyncData() {
-    console.log('jinru')
     return {
-      age: 1
-    }
-  },
-  data() {
-    return {
-      hello: 'msg'
+      hello: 'message'
     }
   }
 }

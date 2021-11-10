@@ -17,8 +17,9 @@ const createServer = async () => {
       let template = readFileSync(resolve('index.html'), 'utf-8')
       template = await vite.transformIndexHtml(url, template)
       const { render } = await vite.ssrLoadModule('./src/entry-server.js')
-      const appHtml = await render(url)
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml)
+      const { html: appHtml, data } = await render(url)
+      // 拼接标签，把data序列化插入到文档中
+      const html = template.replace(`<!--ssr-outlet-->`, `${appHtml}<script>window.__data__=${JSON.stringify(data)}</script>`)
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (error) {
       vite.ssrFixStacktrace(e)

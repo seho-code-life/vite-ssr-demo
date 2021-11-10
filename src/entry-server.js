@@ -6,9 +6,13 @@ export const render = async (url) => {
     const { app, router } = createApp()
     router.push(url)
     await router.isReady()
-    const ctx = {}
-    const html = await renderToString(app, ctx)
-    return html
+    let data = {}
+    if (router.currentRoute.value.matched[0].components.default.asyncData) {
+      const asyncFunc = router.currentRoute.value.matched[0].components.default.asyncData
+      data = asyncFunc.call()
+    }
+    const html = await renderToString(app)
+    return { html, data }
   } catch (error) {
     // console.log(error)
   }

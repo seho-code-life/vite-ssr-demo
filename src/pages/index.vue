@@ -2,12 +2,31 @@
   <div class="index-box">
     <hello-world></hello-world>
     <div @click="handleClickMe">click me</div>
+    {{ age }}
   </div>
 </template>
-<script lang="ts" setup>
-const router = useRouter()
-const handleClickMe = () => {
-  router.push('/me')
+<script lang="ts">
+export default {
+  setup() {
+    const router = useRouter()
+    const handleClickMe = () => {
+      router.push('/me')
+    }
+    return {
+      handleClickMe
+    }
+  },
+  asyncData() {
+    console.log('jinru')
+    return {
+      age: 1
+    }
+  },
+  data() {
+    return {
+      hello: 'msg'
+    }
+  }
 }
 </script>
 
